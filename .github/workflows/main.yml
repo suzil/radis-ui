@@ -59,7 +59,7 @@ jobs:
       - name: Install the backend
         run: |
           pip install -U pip setuptools wheel
-          pip install -r calculate_spectrum/requirements.txt
+          make install
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
