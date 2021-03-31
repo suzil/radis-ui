@@ -1,7 +1,7 @@
 .PHONY: install
 ## Install backend dependencies
 install:
-	pip install -r calculate_spectrum/requirements.txt
+	pip install -r calculate_spectrum/requirements.txt -r ci-requirements.txt
 	pre-commit install
 
 .PHONY: backend
