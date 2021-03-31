@@ -250,3 +250,6 @@ dist
 
 # seleniumbase
 latest_logs/
+
+# AWS SAM build
+.aws-sam/

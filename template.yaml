@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  python3.8
+
+  RADIS application.
+
+Globals:
+  Function:
+    Environment:
+      Variables:
+        HOME: /tmp
+    MemorySize: 512
+    ReservedConcurrentExecutions: 3
+    Timeout: 30
+
+Resources:
+  ServerlessRestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      MethodSettings:
+        - ThrottlingBurstLimit: 10
+        - ThrottlingRateLimit: 1
+  CalculateSpectrum:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        CalculateSpectrum:
+          Type: Api
+          Properties:
+            Path: /calculate_spectrum
+            Method: get
+            RestApiId:
+              Ref: ServerlessRestApi
+
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./calculate_spectrum
+      DockerTag: python3.8-v1
+
+Outputs:
+  CalculateSpectrumApi:
+    Description: "API Gateway endpoint URL for Prod stage for calculate spectrum function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/calculate_spectrum/"
+  CalculateSpectrum:
+    Description: "Calculate Spectrum Lambda Function ARN"
+    Value: !GetAtt CalculateSpectrum.Arn
+  CalculateSpectrumIamRole:
+    Description: "Implicit IAM Role created for calculate spectrum function"
+    Value: !GetAtt CalculateSpectrumRole.Arn
