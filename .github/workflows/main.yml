@@ -3,7 +3,8 @@ name: GH
 on:
   pull_request:
   push:
-    branches: [master]
+    # TODO
+    branches: [master,switch-to-aws]
   release:
     branches: [master]
     types: [published]
@@ -30,6 +31,17 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Setup AWS SAM
+        uses: aws-actions/setup-sam@v0
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        # TODO: Switch to roles for better security
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
       - name: Pip cache
         uses: actions/cache@v2
         with:
@@ -47,7 +59,7 @@ jobs:
       - name: Install the backend
         run: |
           pip install -U pip setuptools wheel
-          make install
+          pip install -r calculate_spectrum/requirements.txt
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -73,8 +85,14 @@ jobs:
       - name: Lint
         run: make lint
 
-      - name: Test
+      # TODO
+      # - name: Test
+      #   run: |
+      #     make backend &
+      #     yarn start &
+      #     make test
+
+      - name: Deploy
         run: |
-          make backend &
-          yarn start &
-          make test
+          sam build
+          sam deploy
