@@ -8,5 +8,5 @@ s3_prefix = "radis-app"
 region = "us-east-2"
 capabilities = "CAPABILITY_IAM"
 image_repositories = ["CalculateSpectrum=764662264940.dkr.ecr.us-east-2.amazonaws.com/radis-app"]
-profile = "suzil"
+profile = "default"
 confirm_changeset = true
