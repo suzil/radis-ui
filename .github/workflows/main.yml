@@ -82,7 +82,8 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build the frontend
-        run: yarn build
+        # TODO: Remove this env var
+        run: CI=false yarn build
 
       - name: Lint
         run: make lint
