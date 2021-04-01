@@ -17,6 +17,30 @@ Globals:
 Resources:
   FrontendBucket:
     Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: radis-app-frontend
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Retain
+  FrontendBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Id: FrontendBucketPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Join
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref FrontendBucket
+                - /*
+      Bucket: !Ref FrontendBucket
 
   ServerlessRestApi:
     Type: AWS::Serverless::Api
@@ -52,3 +76,8 @@ Outputs:
   CalculateSpectrumIamRole:
     Description: "Implicit IAM Role created for calculate spectrum function"
     Value: !GetAtt CalculateSpectrumRole.Arn
+  WebsiteURL:
+    Value: !GetAtt
+      - FrontendBucket
+      - WebsiteURL
+    Description: URL for website hosted on S3

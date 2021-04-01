@@ -45,10 +45,10 @@ repos:
       - id: check-xml
       - id: debug-statements
 
-  - repo: local
-    hooks:
-      - id: run-eslint
-        name: Run ESLint
-        language: system
-        entry: bash -c "cd frontend && yarn lint"
-        pass_filenames: false
+  # - repo: local
+  #   hooks:
+  #     - id: run-eslint
+  #       name: Run ESLint
+  #       language: system
+  #       entry: yarn lint
+  #       pass_filenames: false

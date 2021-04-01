@@ -79,8 +79,12 @@ jobs:
           node-version: 15.x
 
       - name: Install Node.js dependencies
-        working-directory: frontend
         run: yarn install --frozen-lockfile
+
+      - name: Build the frontend
+        working-directory: frontend
+        run: |
+          yarn build
 
       - name: Lint
         run: make lint
@@ -96,3 +100,4 @@ jobs:
         run: |
           sam build
           sam deploy
+          aws s3 sync build/ s3://radis-app-frontend/
