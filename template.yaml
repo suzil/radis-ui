@@ -45,6 +45,7 @@ Resources:
   ServerlessRestApi:
     Type: AWS::Serverless::Api
     Properties:
+      StageName: Prod
       Cors:
         AllowMethods: "'POST, GET'"
         AllowHeaders: "'X-Forwarded-For'"
