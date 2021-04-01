@@ -81,10 +81,6 @@ jobs:
       - name: Install Node.js dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build the frontend
-        # TODO: Remove this env var
-        run: CI=false yarn build
-
       - name: Lint
         run: make lint
 
@@ -99,4 +95,6 @@ jobs:
         run: |
           sam build
           sam deploy
+          CALCULATE_SPECTRUM_API=$(aws cloudformation describe-stacks --stack-name radis-app --query 'Stacks[0].Outputs[?OutputKey==`CalculateSpectrumApi`].OutputValue' --output text)
+          CI=false yarn build
           aws s3 sync build/ s3://radis-app-frontend/

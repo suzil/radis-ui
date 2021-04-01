@@ -45,6 +45,7 @@ Resources:
   ServerlessRestApi:
     Type: AWS::Serverless::Api
     Properties:
+      Cors: radis-app-frontend.s3-website.us-east-2.amazonaws.com
       MethodSettings:
         - ThrottlingBurstLimit: 10
         - ThrottlingRateLimit: 1
@@ -57,7 +58,7 @@ Resources:
           Type: Api
           Properties:
             Path: /calculate_spectrum
-            Method: get
+            Method: post
             RestApiId:
               Ref: ServerlessRestApi
 

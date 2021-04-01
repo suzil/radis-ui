@@ -99,7 +99,10 @@ export const CalcSpectrum: React.FC<{}> = () => {
       maxWavenumber: params.max_wavenumber_range,
     });
 
-    const rawResponse = await axios.post(`/calc-spectrum`, params);
+    const rawResponse = await axios.post(
+      process.env.CALCULATE_SPECTRUM_API || "",
+      params
+    );
     if (!(rawResponse.statusText === "OK")) {
       handleBadResponse("Bad response from backend!");
     } else {
