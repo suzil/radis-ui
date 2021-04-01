@@ -45,10 +45,15 @@ Resources:
   ServerlessRestApi:
     Type: AWS::Serverless::Api
     Properties:
-      Cors: radis-app-frontend.s3-website.us-east-2.amazonaws.com
+      Cors:
+        AllowMethods: "'POST, GET'"
+        AllowHeaders: "'X-Forwarded-For'"
+        AllowOrigin: "'radis-app-frontend.s3-website.us-east-2.amazonaws.com'"
+        MaxAge: "'600'"
       MethodSettings:
         - ThrottlingBurstLimit: 10
         - ThrottlingRateLimit: 1
+
   CalculateSpectrum:
     Type: AWS::Serverless::Function
     Properties:
