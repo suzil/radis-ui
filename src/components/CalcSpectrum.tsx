@@ -100,7 +100,7 @@ export const CalcSpectrum: React.FC<{}> = () => {
     });
 
     const rawResponse = await axios.post(
-      process.env.CALCULATE_SPECTRUM_API || "",
+      process.env.REACT_APP_CALCULATE_SPECTRUM_API || "",
       params
     );
     if (!(rawResponse.statusText === "OK")) {

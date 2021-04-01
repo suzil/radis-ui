@@ -95,7 +95,7 @@ jobs:
         run: |
           sam build
           sam deploy
-          export CALCULATE_SPECTRUM_API=$(aws cloudformation describe-stacks --stack-name radis-app --query 'Stacks[0].Outputs[?OutputKey==`CalculateSpectrumApi`].OutputValue' --output text)
-          echo $CALCULATE_SPECTRUM_API
+          export REACT_APP_CALCULATE_SPECTRUM_API=$(aws cloudformation describe-stacks --stack-name radis-app --query 'Stacks[0].Outputs[?OutputKey==`CalculateSpectrumApi`].OutputValue' --output text)
+          echo $REACT_APP_CALCULATE_SPECTRUM_API
           CI=false yarn build
           aws s3 sync build/ s3://radis-app-frontend/
