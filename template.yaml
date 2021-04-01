@@ -15,6 +15,9 @@ Globals:
     Timeout: 30
 
 Resources:
+  FrontendBucket:
+    Type: AWS::S3::Bucket
+
   ServerlessRestApi:
     Type: AWS::Serverless::Api
     Properties:
