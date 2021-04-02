@@ -46,11 +46,7 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
-      Cors:
-        AllowMethods: "'POST, GET'"
-        AllowHeaders: "'X-Forwarded-For'"
-        AllowOrigin: "'http://radis-app-frontend.s3-website.us-east-2.amazonaws.com'"
-        MaxAge: "'600'"
+      Cors: "'*'"
       MethodSettings:
         - ThrottlingBurstLimit: 10
         - ThrottlingRateLimit: 1
