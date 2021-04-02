@@ -23,7 +23,7 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
-    DeletionPolicy: Retain
+    # DeletionPolicy: Retain
   FrontendBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
