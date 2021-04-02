@@ -22,7 +22,7 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "body": json.dumps({"x": list(x), "y": list(y)}),
+        "body": json.dumps({"data": {"x": list(x), "y": list(y)}}),
         "headers": {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
