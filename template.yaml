@@ -18,7 +18,7 @@ Globals:
     Cors:
       AllowMethods: "'*'"
       AllowHeaders: "'*'"
-      AllowOrigin: "'*'"
+      AllowOrigin: "'radis-app-frontend.s3-website.us-east-2.amazonaws.com'"
 
 Resources:
   FrontendBucket:
