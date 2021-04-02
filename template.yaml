@@ -48,6 +48,8 @@ Resources:
       StageName: Prod
       Cors:
         AllowOrigin: "'*'"
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
       MethodSettings:
         - ThrottlingBurstLimit: 10
         - ThrottlingRateLimit: 1
@@ -62,8 +64,7 @@ Resources:
           Properties:
             Path: /calculate_spectrum
             Method: post
-            RestApiId:
-              Ref: ServerlessRestApi
+            RestApiId: !Ref ServerlessRestApi
 
     Metadata:
       Dockerfile: Dockerfile
