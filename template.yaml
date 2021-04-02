@@ -49,7 +49,7 @@ Resources:
       Cors:
         AllowMethods: "'POST, GET'"
         AllowHeaders: "'X-Forwarded-For'"
-        AllowOrigin: "'radis-app-frontend.s3-website.us-east-2.amazonaws.com'"
+        AllowOrigin: "'http://radis-app-frontend.s3-website.us-east-2.amazonaws.com'"
         MaxAge: "'600'"
       MethodSettings:
         - ThrottlingBurstLimit: 10
