@@ -48,7 +48,7 @@ Resources:
       StageName: Prod
       Cors:
         AllowOrigin: "'*'"
-        AllowMethods: "'*'"
+        AllowMethods: "'OPTIONS,POST,GET'"
         AllowHeaders: "'*'"
       MethodSettings:
         - ThrottlingBurstLimit: 10
