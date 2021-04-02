@@ -46,7 +46,8 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
-      Cors: "'*'"
+      Cors:
+        AllowOrigin: "'*'"
       MethodSettings:
         - ThrottlingBurstLimit: 10
         - ThrottlingRateLimit: 1
