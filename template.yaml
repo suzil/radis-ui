@@ -52,7 +52,8 @@ Resources:
         AllowHeaders: "'*'"
       MethodSettings:
         - ThrottlingBurstLimit: 10
-        - ThrottlingRateLimit: 1
+          ThrottlingRateLimit: 1
+          ResourcePath: "/*"
 
   CalculateSpectrum:
     Type: AWS::Serverless::Function
