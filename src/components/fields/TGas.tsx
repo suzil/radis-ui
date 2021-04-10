@@ -1,29 +1,36 @@
 import { InputAdornment, TextField } from "@material-ui/core";
 import React from "react";
-import { CalcSpectrumParams, ValidationErrors } from "../../constants";
+import { UseFormRegister, FieldErrors } from "react-hook-form";
+import { CalcSpectrumFieldValues } from "../types";
 
 interface TGasProps {
-  params: CalcSpectrumParams;
-  setParams: (params: CalcSpectrumParams) => void;
-  validationErrors: ValidationErrors;
+  register: UseFormRegister<CalcSpectrumFieldValues>;
+  errors: FieldErrors<CalcSpectrumFieldValues>;
 }
 
-export const TGas: React.FC<TGasProps> = ({
-  params,
-  setParams,
-  validationErrors,
-}) => (
-  <TextField
-    fullWidth
-    id="tgas-input"
-    error={validationErrors.tgas !== undefined}
-    helperText={validationErrors.tgas}
-    value={params.tgas}
-    type="number"
-    onChange={(e) => setParams({ ...params, tgas: parseFloat(e.target.value) })}
-    InputProps={{
-      endAdornment: <InputAdornment position="end">K</InputAdornment>,
-    }}
-    label="Tgas"
-  />
-);
+export const TGas: React.FC<TGasProps> = ({ register, errors }) => {
+  const { ref, ...rest } = register("tgas", {
+    required: "This field is required",
+    min: { value: 1, message: "The minimum temperature is 1 K" },
+    max: { value: 9000, message: "The minimum temperature is 9000 K" },
+    valueAsNumber: true,
+  });
+  return (
+    <>
+      <TextField
+        fullWidth
+        id="tgas-input"
+        type="number"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">K</InputAdornment>,
+        }}
+        inputProps={{ step: "any" }}
+        label="Tgas"
+        error={errors.tgas != undefined}
+        helperText={errors.tgas?.message}
+        inputRef={ref}
+        {...rest}
+      />
+    </>
+  );
+};

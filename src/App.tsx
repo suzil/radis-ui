@@ -6,6 +6,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import "fontsource-roboto";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { CalcSpectrum } from "./components/CalcSpectrum";
 import { palette } from "./constants";
 import logo from "./radis.png";
@@ -41,19 +42,27 @@ const Header: React.FC = () => {
   );
 };
 
+const MainPage = () => (
+  <>
+    <Header />
+    <Container maxWidth="lg">
+      <Box m={4}>
+        <CalcSpectrum />
+      </Box>
+    </Container>
+  </>
+);
+
 function App(): React.ReactElement {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <ThemeProvider theme={theme}>
-        <Header />
-        <Container maxWidth="lg">
-          <Box m={4}>
-            <CalcSpectrum />
-          </Box>
-        </Container>
-      </ThemeProvider>
-    </div>
+    <Router>
+      <div className={classes.root}>
+        <ThemeProvider theme={theme}>
+          <Route path="/" component={MainPage} />
+        </ThemeProvider>
+      </div>
+    </Router>
   );
 }
 
